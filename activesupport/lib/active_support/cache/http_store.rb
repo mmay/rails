@@ -2,8 +2,9 @@ require 'monitor'
 
 module ActiveSupport
   module Cache
-    # A cache store implementation which stores everything into memory in the
-    # same process. If you're running multiple Ruby on Rails server processes
+    # A cache store implementation which uses a reverse proxy content delivery
+    # network to stores everything. 
+    # If you're running multiple Ruby on Rails server processes
     # (which is the case if you're using mongrel_cluster or Phusion Passenger),
     # then this means that Rails server process instances won't be able
     # to share cache data with each other and this may not be the most
@@ -14,8 +15,9 @@ module ActiveSupport
     # a cleanup will occur which tries to prune the cache down to three quarters
     # of the maximum size by removing the least recently used entries.
     #
-    # MemoryStore is thread-safe.
-    class MemoryStore < Store
+    # EdgeStore is thread-safe?
+    class EdgeStore < Store
+
       def initialize(options = nil)
         options ||= {}
         super(options)
